@@ -1,8 +1,4 @@
 
-
-
-
-
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
@@ -82,7 +78,7 @@ glow.Parent = AvatarFrame
 -- Animated Logo with pulse effect
 local Logo = Instance.new("ImageLabel")
 Logo.Size = UDim2.new(0, 60, 0, 60)
-Logo.Position = UDim2.new(0.5, -30, 0.35, -30)
+Logo.Position = UDim2.new(0.5, -10, 0.35, -10)
 Logo.Image = "rbxassetid://17091459839"
 Logo.BackgroundTransparency = 1
 Logo.Parent = LoadingContent
