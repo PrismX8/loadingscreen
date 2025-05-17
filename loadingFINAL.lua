@@ -1,3 +1,4 @@
+if game:GetService("CoreGui"):FindFirstChild("LoadingScreen") then return end
 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
