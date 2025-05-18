@@ -156,7 +156,7 @@ LoadingSubtext.TextXAlignment = Enum.TextXAlignment.Left
 LoadingSubtext.Parent = LoadingContent
 
 -- Animate Progress
-local loadDuration = 3.5
+local loadDuration = 1.5
 local progress = 0
 
 -- Smooth progress animation
