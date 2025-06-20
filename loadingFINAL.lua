@@ -3,7 +3,6 @@ if game:GetService("CoreGui"):FindFirstChild("LoadingScreen") then return end
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
--- Create loading screen with maximum priority
 local LoadingGUI = Instance.new("ScreenGui")
 LoadingGUI.Name = "LoadingScreen"
 LoadingGUI.ZIndexBehavior = Enum.ZIndexBehavior.Global
@@ -11,7 +10,6 @@ LoadingGUI.DisplayOrder = 2147483647
 LoadingGUI.IgnoreGuiInset = true
 LoadingGUI.Parent = game:GetService("CoreGui")
 
--- Modern glass-morphism container
 local Container = Instance.new("Frame")
 Container.Size = UDim2.new(1, 0, 1, 0)
 Container.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
@@ -19,12 +17,12 @@ Container.BackgroundTransparency = 0.3
 Container.BorderSizePixel = 0
 Container.Parent = LoadingGUI
 
--- Add blur effect
+
 local blur = Instance.new("BlurEffect")
 blur.Size = 10
 blur.Parent = game:GetService("Lighting")
 
--- Glass panel
+
 local LoadingContent = Instance.new("Frame")
 LoadingContent.Size = UDim2.new(0, 450, 0, 350)
 LoadingContent.Position = UDim2.new(0.5, -225, 0.5, -175)
@@ -35,7 +33,7 @@ local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 12)
 corner.Parent = LoadingContent
 
--- Add subtle drop shadow
+
 local shadow = Instance.new("ImageLabel")
 shadow.Size = UDim2.new(1, 10, 1, 10)
 shadow.Position = UDim2.new(0, -5, 0, -5)
@@ -60,12 +58,12 @@ Avatar.Image = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.H
 Avatar.BackgroundTransparency = 1
 Avatar.Parent = AvatarFrame
 
--- Add circular mask
+
 local mask = Instance.new("UICorner")
 mask.CornerRadius = UDim.new(1, 0)
 mask.Parent = Avatar
 
--- Add glowing outline to avatar
+
 local glow = Instance.new("ImageLabel")
 glow.Size = UDim2.new(1.2, 0, 1.2, 0)
 glow.Position = UDim2.new(-0.1, 0, -0.1, 0)
@@ -76,7 +74,6 @@ glow.SliceCenter = Rect.new(24, 24, 24, 24)
 glow.BackgroundTransparency = 1
 glow.Parent = AvatarFrame
 
--- Animated Logo with pulse effect
 local Logo = Instance.new("ImageLabel")
 Logo.Size = UDim2.new(0, 60, 0, 60)
 Logo.Position = UDim2.new(0.5, -34, 0.35, 7)
@@ -84,7 +81,6 @@ Logo.Image = "rbxassetid://17091459839"
 Logo.BackgroundTransparency = 1
 Logo.Parent = LoadingContent
 
--- Pulse animation
 game:GetService("TweenService"):Create(
     Logo,
     TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true),
@@ -110,7 +106,6 @@ ProgressFill.BorderSizePixel = 0
 ProgressFill.Parent = ProgressBar
 barCorner:Clone().Parent = ProgressFill
 
--- Add gradient to progress bar
 local gradient = Instance.new("UIGradient")
 gradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(0, Color3.fromRGB(155, 89, 182)),
@@ -119,7 +114,6 @@ gradient.Color = ColorSequence.new{
 gradient.Rotation = 90
 gradient.Parent = ProgressFill
 
--- Loading text with better typography
 local LoadingText = Instance.new("TextLabel")
 LoadingText.Size = UDim2.new(1, -40, 0, 30)
 LoadingText.Position = UDim2.new(0, 20, 0.8, 0)
@@ -131,7 +125,6 @@ LoadingText.TextSize = 18
 LoadingText.TextXAlignment = Enum.TextXAlignment.Left
 LoadingText.Parent = LoadingContent
 
--- Progress percentage with modern design
 local ProgressText = Instance.new("TextLabel")
 ProgressText.Size = UDim2.new(0, 60, 0, 20)
 ProgressText.Position = UDim2.new(0.9, -60, 0.8, 0)
@@ -143,7 +136,7 @@ ProgressText.TextSize = 16
 ProgressText.TextXAlignment = Enum.TextXAlignment.Right
 ProgressText.Parent = LoadingContent
 
--- Status message with typewriter effect
+
 local LoadingSubtext = Instance.new("TextLabel")
 LoadingSubtext.Size = UDim2.new(1, -40, 0, 20)
 LoadingSubtext.Position = UDim2.new(0, 20, 0.9, 0)
@@ -155,11 +148,9 @@ LoadingSubtext.TextSize = 14
 LoadingSubtext.TextXAlignment = Enum.TextXAlignment.Left
 LoadingSubtext.Parent = LoadingContent
 
--- Animate Progress
 local loadDuration = 1.5
 local progress = 0
 
--- Smooth progress animation
 local progressTween = game:GetService("TweenService"):Create(
     ProgressFill,
     TweenInfo.new(loadDuration, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
@@ -167,7 +158,6 @@ local progressTween = game:GetService("TweenService"):Create(
 )
 progressTween:Play()
 
--- Update progress text with smooth transitions
 local connection
 connection = game:GetService("RunService").Heartbeat:Connect(function()
     local currentWidth = ProgressFill.AbsoluteSize.X
@@ -180,7 +170,7 @@ connection = game:GetService("RunService").Heartbeat:Connect(function()
     end
 end)
 
--- Professional loading messages with typewriter effect
+
 local messages = {
     "Initializing core modules...",
     "Loading game assets...",
@@ -202,7 +192,6 @@ for i, msg in ipairs(messages) do
     task.wait(loadDuration/#messages)
 end
 
--- Elegant fade out with blur reduction
 local fadeTween = game:GetService("TweenService"):Create(
     Container,
     TweenInfo.new(0.7, Enum.EasingStyle.Quad),
@@ -216,11 +205,10 @@ game:GetService("TweenService"):Create(
     {Size = 0}
 ):Play()
 
--- Cleanup
+
 fadeTween.Completed:Connect(function()
     pcall(function()
         LoadingGUI:Destroy()
         blur:Destroy()
-        -- Show your UI here
     end)
 end)
